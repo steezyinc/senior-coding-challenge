@@ -9,6 +9,7 @@ import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import Login from './components/Login'
 import Classes from './components/Classes'
 import Register from './components/Register'
+import VideoPlayer from './components/VideoPlayer'
 
 function App() {
   const [isAuthed, checkAuth] = useState(false);
@@ -19,7 +20,7 @@ function App() {
 
   function handleLogin(jwt) {
     localStorage.setItem("jwt", jwt)
-    checkAuth(() => true)
+    checkAuth(true)
     window.location.href ='/classes'
   }
 
@@ -53,12 +54,13 @@ function App() {
 
           <Switch>
             <Route exact path="/">
-              <Classes
-                isAuthed={isAuthed}
-              />
-            </Route>
-            <Route path="/classes">
               <Classes />
+            </Route>
+            <Route exact path="/classes">
+              <Classes />
+            </Route>
+            <Route exact path="/classes/:classId">
+              <VideoPlayer />
             </Route>
             <Route path="/login">
               <Login 

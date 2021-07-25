@@ -9,15 +9,23 @@ import thumbnail3 from '../assets/class-thumbnail-3.jpg'
 
 const paginationLimit = 9;
 
-function Classes({isAuthed}) {
+function Classes() {
   const [isLoading, setLoadingState] = useState(true);
-
+  const [isAuthed, setAuth] = useState(false);
   const [state, setState] = useState({
     classList: [],
     totalNumbeOfClasses: 0,
     currentPaginationReference: null,
     activePageNumber: 0
   });
+
+  useEffect(() => {
+    getClasses(true);
+    const hasJwt = localStorage.getItem('jwt');
+    if (hasJwt) {
+      setAuth(true);
+    }
+  }, [])
 
   async function getClasses(includeTotal, startAtKey) {
     const queryObject = {}
@@ -51,14 +59,18 @@ function Classes({isAuthed}) {
     }
   }
 
-  useEffect(() => {
-    getClasses(true);
-  }, [])
+  function handleVideoClick(videoUrl, id) {
+    if (isAuthed) {
+      window.location.href = `classes/${id}?videoUrl=${videoUrl}`;
+    } else {
+      window.location.href = `login`;
+    }
+  }
 
   function renderClasses() {
-    return state.classList.map((classItem) => {
-      const {title, instructor, level, song, thumbnailSlug, videoUrl} = classItem
-
+    return state.classList.map((classItem, index) => {
+      const {title, instructor, level, song, thumbnailSlug, videoUrl} = classItem;
+      const id = state.activePageNumber * paginationLimit + index; // ask me about this... #firebaseThings
       let renderedThumbnail = '';
 
       switch(thumbnailSlug) {
@@ -76,7 +88,7 @@ function Classes({isAuthed}) {
 
       return(
         <Col>
-          <Card style={{width: '25rem'}} className="bg-dark text-white">
+          <Card style={{width: '25rem'}} className="bg-dark text-white" onClick={() => handleVideoClick(videoUrl, id)}>
             <Card.Img src={renderedThumbnail} alt="Card image" />
             <Card.ImgOverlay>
               <Col md={8}> 
