@@ -37,3 +37,12 @@
     transform: rotate(360deg);
   }
 }
+
+.card-text {
+  margin-bottom: 0px;
+  text-align: left;
+}
+
+.card-title {
+  text-align: left;
+}

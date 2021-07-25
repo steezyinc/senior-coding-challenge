@@ -53,14 +53,16 @@ function App() {
 
           <Switch>
             <Route exact path="/">
-              <Classes />
+              <Classes
+                isAuthed={isAuthed}
+              />
             </Route>
             <Route path="/classes">
               <Classes />
             </Route>
             <Route path="/login">
               <Login 
-                handleLogin= { handleLogin }
+                handleLogin= {handleLogin}
               />
             </Route>
             <Route path="/register">

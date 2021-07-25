@@ -8,8 +8,10 @@ async function getClasses(startAtKey = '0', limit = 9) {
     .get();
 
   if (snapshot.exists()) {
-    return snapshot.val()
-      .filter((classItem) => classItem); // removes nulls from pagination
+    if (parseInt(startAtKey, 10) > 9) { // please ask me about this... firebase is weird...
+      return Object.values(snapshot.val()).map((value) => value);
+    }
+    return snapshot.val().filter((classItem) => classItem);
   }
   return null;
 }
