@@ -52,6 +52,9 @@ function App() {
         </Navbar>
 
           <Switch>
+          <Route path="/">
+              <Classes />
+            </Route>
             <Route path="/classes">
               <Classes />
             </Route>
