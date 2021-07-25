@@ -6,6 +6,11 @@ const secret = process.env.SECRET;
 
 function verifyAuth(req, res, next) {
   const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(403).json({ message: 'not authed to access this resource' });
+  }
+
   const token = authorization.replace('Bearer ', '');
 
   try {

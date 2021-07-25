@@ -22,6 +22,7 @@ function Login({ handleLogin }) {
       });
       
       const { jwt } = res.data
+      axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
       handleLogin(jwt)
     } catch (err) {
       // todo: helpful error message in form
