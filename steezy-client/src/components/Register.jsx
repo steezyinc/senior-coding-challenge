@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Container, Row, Col, Form, Card } from 'react-bootstrap';
 import axios from 'axios';
 
-function Login({ handleLogin }) {
+function Register() {
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -10,19 +10,18 @@ function Login({ handleLogin }) {
   })
 
 
-  async function requestJwt() {
+  async function register() {
     try {
       const res = await axios({
         method: 'post',
-        url: '/users/login',
+        url: '/users/register',
         data: {
           email: state.email,
           password: state.password
         }
       });
       
-      const { jwt } = res.data
-      handleLogin(jwt)
+      window.location.href = '/login'
     } catch (err) {
       // todo: helpful error message in form
       setState({
@@ -69,17 +68,12 @@ function Login({ handleLogin }) {
                       isInvalid={state.isInvalid}/>
                   </Form.Group>
                   <div className="d-grid gap-2">
-                    <Button variant="primary" size="md" onClick={requestJwt}>
-                      LOG IN
+                    <Button variant="primary" size="md" onClick={register}>
+                      Create Account
                     </Button>
                   </div>
                 </Form>
               </Card.Body>
-              <Card.Header>Don't have an account?
-                <Button variant="link" onClick={() => {window.location.href = '/register'}}>
-                  Sign up
-                </Button>
-              </Card.Header>
             </Card>
           </Col>
         </Row>
@@ -88,4 +82,4 @@ function Login({ handleLogin }) {
   );
 }
 
-export default Login;
+export default Register;

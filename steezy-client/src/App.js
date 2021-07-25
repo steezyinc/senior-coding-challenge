@@ -1,40 +1,71 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Button } from 'react-bootstrap';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import { Button, Navbar, Container, Nav } from 'react-bootstrap';
+
+import Login from './components/Login'
+import Classes from './components/Classes'
+import Register from './components/Register'
 
 function App() {
-  const [myVal, setResponse] = useState('hi');
+  const [isAuthed, checkAuth] = useState(false);
 
   useEffect(() => {
-    async function getResponse() {
-      const response = await fetch('/hello');
-      const body = await response.json();
-  
-      setResponse(JSON.stringify(body));
-    }
-    getResponse()
+    checkAuth(() => (localStorage.getItem("jwt") !== null))
   }, [])
+
+  function handleLogin(jwt) {
+    localStorage.setItem("jwt", jwt)
+    checkAuth(() => true)
+    window.location.href ='/classes'
+  }
+
+  function handleLogInAndOut() {
+    if (isAuthed) {
+      localStorage.clear();
+      checkAuth(() => false)
+    }
+
+    window.location.href ='/login'
+  }
 
   return (
     <div className="App">
-      <header className="App-header">
-        { myVal }
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <div>
+        <Navbar bg="dark" variant="dark">
+          <Container>
+            <Navbar.Brand href="#">STEEZY SAMPLE APP</Navbar.Brand>
+            <Nav.Link href="/classes">Classes</Nav.Link>
+            <Navbar.Toggle />
+            <Navbar.Collapse className="justify-content-end">
+              <Navbar.Text>
+                <Button variant="link" href="#" onClick={handleLogInAndOut}>
+                  { isAuthed ? 'Logout': 'Login' }
+                </Button>
+              </Navbar.Text>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+
+          <Switch>
+            <Route path="/classes">
+              <Classes />
+            </Route>
+            <Route path="/login">
+              <Login 
+                handleLogin= { handleLogin }
+              />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }

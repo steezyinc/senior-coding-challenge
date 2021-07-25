@@ -43,10 +43,16 @@ userRoute.post(
   body('email').exists().normalizeEmail().isEmail(),
   body('password').exists().isLength({ min: 6 }),
   async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { email, password } = req.body;
     const hashedEmail = MD5(email).toString();
 
-    const { hashedPassword } = await users.getUserById(hashedEmail);
+    const user = await users.getUserById(hashedEmail);
+    const { hashedPassword } = user;
 
     const isValidPassword = await passwordIsVerified(password, hashedPassword);
 
