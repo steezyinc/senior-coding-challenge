@@ -52,7 +52,7 @@ function App() {
         </Navbar>
 
           <Switch>
-          <Route path="/">
+            <Route exact path="/">
               <Classes />
             </Route>
             <Route path="/classes">
@@ -65,6 +65,9 @@ function App() {
             </Route>
             <Route path="/register">
               <Register />
+            </Route>
+            <Route path="*">
+              <Classes />
             </Route>
           </Switch>
         </div>
