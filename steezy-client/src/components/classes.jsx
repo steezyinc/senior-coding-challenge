@@ -91,8 +91,6 @@ function Classes({isAuthed}) {
                   Song: {song}
                 </Card.Text>
               </Col>
-
-
             </Card.ImgOverlay>
           </Card>
         </Col>
