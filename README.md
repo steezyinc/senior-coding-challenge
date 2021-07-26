@@ -50,12 +50,12 @@ As an authenticated user:
 
 ANALYTICS  
 As a user:
-- [ ] I want the application to track what timestamp I last left off in the class
-- [ ] I want the application to track what percentage of the class the user actually watched
-  - [ ] Case 1: User repeatedly watches the first 10% of the video and then closes the class player. The progress should only be 10%.
-  - [ ] Case 2: User watches the first 15% of the video. The user seeks to 10% timestamp and watches up to 25%. The user has only watched a total of 25% of the video. The total progress should be 25%.
-  - [ ] Case 3: User watches the first 10% and the last 10% of the video. The user has watched a total of 20% of the video. The total progress should be 20%.
-- [ ] I want the application to track how much time the user actually spent on the video. This includes play time and pause time
+- [x] I want the application to track what timestamp I last left off in the class
+- [x] I want the application to track what percentage of the class the user actually watched
+  - [x] Case 1: User repeatedly watches the first 10% of the video and then closes the class player. The progress should only be 10%.
+  - [x] Case 2: User watches the first 15% of the video. The user seeks to 10% timestamp and watches up to 25%. The user has only watched a total of 25% of the video. The total progress should be 25%.
+  - [x] Case 3: User watches the first 10% and the last 10% of the video. The user has watched a total of 20% of the video. The total progress should be 20%.
+- [x] I want the application to track how much time the user actually spent on the video. This includes play time and pause time
 
 NAVIGATION HEADER  
 As a user:

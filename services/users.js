@@ -25,6 +25,7 @@ async function checkUserProgress(id, videoId, videoDuration) {
 async function updateProgress(userId, videoId, time, pausedTotal) {
   if (time) {
     firebase.setValueByPath(`progress/${userId}/${videoId}/progress/${time}`, true);
+    firebase.setValueByPath(`progress/${userId}/${videoId}/lastPlayedTimestamp`, time);
   }
 
   if (pausedTotal) {
