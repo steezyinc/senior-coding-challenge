@@ -32,9 +32,32 @@ async function updateProgress(userId, videoId, time, pausedTotal) {
   }
 }
 
+async function getUserProgress(userId, classIdsList) {
+  const operationsArray = classIdsList.map((classId) => firebase.getValueByPath(`progress/${userId}/${classId}/progress`));
+
+  const classProgressList = await Promise.all(operationsArray);
+
+  const processProgressList = classProgressList.map((progressArray) => {
+    if (!progressArray) {
+      return 0;
+    }
+    const watched = progressArray.filter((ts) => ts);
+    return Math.round((watched.length / progressArray.length) * 100);
+  });
+
+  const mappedProgressToClass = classIdsList.reduce((accumulator, classId, index) => {
+    const temp = accumulator;
+    temp[classId] = processProgressList[index];
+    return temp;
+  }, {});
+
+  return mappedProgressToClass;
+}
+
 module.exports = {
   getUserById,
   createNewUser,
   checkUserProgress,
   updateProgress,
+  getUserProgress,
 };

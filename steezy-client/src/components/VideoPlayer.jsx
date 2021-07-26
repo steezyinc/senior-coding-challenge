@@ -55,7 +55,6 @@ function VideoPlayer() {
   async function handleProgress(e) {
     const pathArray = window.location.pathname.split('/'); 
     const videoId = pathArray[pathArray.length - 1];
-    console.log(e)
     await axios({
       url: `/users/progress`,
       method: 'put',
@@ -127,7 +126,6 @@ function VideoPlayer() {
         onPlay={handlePlay}
         controls
       />
-      {JSON.stringify(state)}
     </div>
   );
 }

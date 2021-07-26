@@ -91,4 +91,16 @@ userRoute.put(
   },
 );
 
+userRoute.get(
+  '/progress',
+  verifyAuth,
+  async (req, res) => {
+    const { classIds } = req.query;
+    const classIdsList = classIds.split(',');
+    const { id } = res.locals.user;
+    const classProgressList = await users.getUserProgress(id, classIdsList);
+    return res.status(200).json({ classProgressList });
+  },
+);
+
 module.exports = userRoute;

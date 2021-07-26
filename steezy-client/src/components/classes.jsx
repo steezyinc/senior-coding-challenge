@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Card, Spinner, Container, Pagination } from 'react-bootstrap';
+import { Row, Col, Card, Spinner, Container, Pagination, ProgressBar } from 'react-bootstrap';
 import axios from 'axios';
 import qs from 'query-string';
 
@@ -16,26 +16,43 @@ function Classes() {
     classList: [],
     totalNumbeOfClasses: 0,
     currentPaginationReference: null,
-    activePageNumber: 0
+    activePageNumber: 0,
+    classProgressList: {}
   });
 
   useEffect(() => {
     getClasses(true);
-    const hasJwt = localStorage.getItem('jwt');
-    if (hasJwt) {
-      setAuth(true);
-    }
   }, [])
 
-  async function getClasses(includeTotal, startAtKey) {
-    const queryObject = {}
+  async function getClassProgress(jwt, startId) {
+    console.log(state);
+    const classIdArray = [];
+    for (let i = 0; i < 9; i++) {
+      classIdArray.push(startId + i);
+    }
+    const response = await axios({
+      method: 'get',
+      url: `/users/progress?classIds=${classIdArray}`,
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    });
+    debugger
+    setState((prevState) => ({
+      ...prevState,
+      ...response.data,
+    }));
+  }
+
+  async function getClasses(includeTotal, startAtKey = 0) {
+    const queryObject = {};
 
     if (includeTotal) {
-      queryObject.includeTotal = includeTotal
+      queryObject.includeTotal = includeTotal;
     }
 
     if (startAtKey) {
-      queryObject.startAtKey = startAtKey
+      queryObject.startAtKey = startAtKey;
     }
 
     const query = qs.stringify(queryObject)
@@ -49,14 +66,21 @@ function Classes() {
 
       setState((prevState) => ({
         ...prevState,
-        ...response.data
+        ...response.data,
       }));
+
+      const jwt = localStorage.getItem('jwt');
+      if (jwt) {
+        setAuth(true);
+        getClassProgress(jwt, startAtKey);
+      }
     } catch (err) {
       // todo: show something helpful
       console.log('couldnt get classes');
     } finally {
       setLoadingState(false);
     }
+
   }
 
   function handleVideoClick(videoUrl, id) {
@@ -65,6 +89,13 @@ function Classes() {
     } else {
       window.location.href = `login`;
     }
+  }
+
+  function renderProgress(index) {
+    debugger
+    const videoId = index + state.activePageNumber * paginationLimit;
+
+    return state.classProgressList[videoId]
   }
 
   function renderClasses() {
@@ -102,8 +133,10 @@ function Classes() {
                 <Card.Text className="small text-info">
                   Song: {song}
                 </Card.Text>
+                
               </Col>
             </Card.ImgOverlay>
+            <ProgressBar now={renderProgress(index)} />
           </Card>
         </Col>
       )
@@ -143,7 +176,7 @@ function Classes() {
         ...prevState,
         activePageNumber: pageNumber
       }));
-
+      debugger
       await getClasses(false, pageNumber * paginationLimit) 
     }
 
