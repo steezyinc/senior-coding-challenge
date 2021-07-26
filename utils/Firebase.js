@@ -17,13 +17,6 @@ class Firebase {
   constructor() {
     firebase.initializeApp(config);
     this.db = firebase.database();
-
-    const hello = this.db.ref('users');
-
-    hello.on('value', (snapshot) => {
-      const data = snapshot.val();
-      console.log(data);
-    });
   }
 
   async getValueByPath(path) {
@@ -36,7 +29,6 @@ class Firebase {
 
       return null;
     } catch (err) {
-      console.log('error fetching data', err);
       throw Error(err);
     }
   }

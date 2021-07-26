@@ -25,7 +25,6 @@ function Classes() {
   }, [])
 
   async function getClassProgress(jwt, startId) {
-    console.log(state);
     const classIdArray = [];
     for (let i = 0; i < 9; i++) {
       classIdArray.push(startId + i);

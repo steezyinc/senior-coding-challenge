@@ -76,7 +76,6 @@ function VideoPlayer() {
   }
 
   function handleDuration(e) {
-    console.log(e)
     setState((prevState) => ({
       ...prevState,
       videoDuration: e,
@@ -100,7 +99,6 @@ function VideoPlayer() {
 
     const pathArray = window.location.pathname.split('/'); 
     const videoId = pathArray[pathArray.length - 1];
-    console.log(e)
     await axios({
       url: `/users/progress`,
       method: 'put',
