@@ -8,45 +8,45 @@ Your task is to bring the next generation of dance education to users around the
 
 AUTHENTICATION  
 As a user:
-- [ ] I want to navigate to the /signup route to sign up with an email and a password
-  - [ ] I want my email to be unique to me when I sign up. If a user already has the email I specified I should return to the signup page with some indication of an error
-- [ ] I want to navigate to the /login route to login to my account with my email and password
-  - [ ] I want the login page to show me some indication of an error if my login information is incorrect
-  - [ ] I want the login page to have a link to the /signup page if I do not already have an account
-- [ ] I want to be able to logout of my account
+- [x] I want to navigate to the /signup route to sign up with an email and a password
+  - [x] I want my email to be unique to me when I sign up. If a user already has the email I specified I should return to the signup page with some indication of an error
+- [x] I want to navigate to the /login route to login to my account with my email and password
+  - [x] I want the login page to show me some indication of an error if my login information is incorrect
+  - [x] I want the login page to have a link to the /signup page if I do not already have an account
+- [x] I want to be able to logout of my account
 
 CLASSES INDEX  
 As an unauthenticated user:
-- [ ] I want to navigate to the /classes route to see what classes are available. (/classes will act as the homepage)
-- [ ] I want to see a login button indicating that I am not authenticated
-- [ ] I want to be redirected to the login page if I try to view one of the classes by clicking on the thumbnail
+- [x] I want to navigate to the /classes route to see what classes are available. (/classes will act as the homepage)
+- [x] I want to see a login button indicating that I am not authenticated
+- [x] I want to be redirected to the login page if I try to view one of the classes by clicking on the thumbnail
   
   when I am viewing or searching the available classes
-  - [ ] I want to see the first 9 classes available, with the ability to paginate (9 classes per page)
-  - [ ] I want to see the title of the class, the instructor, the level, the class thumbnail, and the song used in the class
+  - [x] I want to see the first 9 classes available, with the ability to paginate (9 classes per page)
+  - [x] I want to see the title of the class, the instructor, the level, the class thumbnail, and the song used in the class
   - [ ] I want to search the entire catalog of classes. I want to search by title, instructor, level, or song
     - [ ] I want to search without worrying about case sensitivity
     - [ ] I want my search results to show partial results e.g. searching "Anne" will return "Leanne" and "Anne"
   - [ ] I want my search results to be indexed 9 classes at a time
 
 As an authenticated user:
-- [ ] I want to navigate to the /classes route to see what classes are available. (/classes will act as the homepage)
-  - [ ] I want /classes to be my homepage
-  - [ ] I want to see a loading state when I fetch classes
-- [ ] I want to enter the class player when I click on a class thumbnail  
+- [x] I want to navigate to the /classes route to see what classes are available. (/classes will act as the homepage)
+  - [x] I want /classes to be my homepage
+  - [x] I want to see a loading state when I fetch classes
+- [x] I want to enter the class player when I click on a class thumbnail  
 
   when I am viewing or searching the available classes
   - [ ] I want the search functionality to mirror the unauthenticated user flow
 
 CLASS PAGE  
 As an authenticated user:
-- [ ] I want to navigate to the /classes/{ID} route for each class
-- [ ] I want to play the video
-- [ ] I want to pause the video
-- [ ] I want to see a timestamp of how many seconds I have elapsed in the video
-- [ ] I want to see a timestamp of how many seconds I have remaining in the video
-- [ ] I want to see a progress bar representing where I am in the video
-- [ ] I want to be able to seek to different parts of the video by clicking on the progress bar
+- [x] I want to navigate to the /classes/{ID} route for each class
+- [x] I want to play the video
+- [x] I want to pause the video
+- [x] I want to see a timestamp of how many seconds I have elapsed in the video
+- [x] I want to see a timestamp of how many seconds I have remaining in the video
+- [x] I want to see a progress bar representing where I am in the video
+- [x] I want to be able to seek to different parts of the video by clicking on the progress bar
 
 ANALYTICS  
 As a user:
@@ -59,8 +59,8 @@ As a user:
 
 NAVIGATION HEADER  
 As a user:
-- [ ] I want to navigate back to the homepage (/classes) wherever I am on the app
-- [ ] I want to logout of the application
+- [x] I want to navigate back to the homepage (/classes) wherever I am on the app
+- [x] I want to logout of the application
 
 ## Your Goal
 

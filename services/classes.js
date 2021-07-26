@@ -7,13 +7,24 @@ async function getClasses(startAtKey = '0', limit = 9) {
     .limitToFirst(limit)
     .get();
 
+  let classesList = [];
+
   if (snapshot.exists()) {
     if (parseInt(startAtKey, 10) > 9) { // please ask me about this... firebase is weird...
-      return Object.values(snapshot.val()).map((value) => value);
+      classesList = Object.values(snapshot.val()).map((value) => value);
+    } else {
+      classesList = snapshot.val().filter((classItem) => classItem);
     }
-    return snapshot.val().filter((classItem) => classItem);
   }
-  return null;
+
+  const scrubbedList = classesList.map((classItem) => {
+    // this omits the videoUrl
+    // same as using delete operator but doesnt break lint rule of param-reassign
+    const { videoUrl, ...rest } = classItem;
+    return { ...rest };
+  });
+
+  return scrubbedList;
 }
 
 async function getTotalClassCount() {
@@ -25,7 +36,14 @@ async function getTotalClassCount() {
   return null;
 }
 
+async function getClassVideoUrlById(id) {
+  const videoUrl = await firebase.getValueByPath(`classes/${id}/videoUrl`);
+
+  return videoUrl;
+}
+
 module.exports = {
   getClasses,
   getTotalClassCount,
+  getClassVideoUrlById,
 };

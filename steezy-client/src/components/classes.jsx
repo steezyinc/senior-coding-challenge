@@ -61,7 +61,7 @@ function Classes() {
 
   function handleVideoClick(videoUrl, id) {
     if (isAuthed) {
-      window.location.href = `classes/${id}?videoUrl=${videoUrl}`;
+      window.location.href = `classes/${id}`;
     } else {
       window.location.href = `login`;
     }

@@ -69,12 +69,25 @@ userRoute.post(
   },
 );
 
-userRoute.get(
-  '/protected',
+userRoute.post(
+  '/progress',
   verifyAuth,
-  (req, res) => {
-    console.log(res.locals);
-    res.status(200).json({});
+  async (req, res) => {
+    const { videoId, videoDuration } = req.body;
+    const { id } = res.locals.user;
+    await users.checkUserProgress(id, videoId, videoDuration);
+    return res.status(200).json({ message: 'OK' });
+  },
+);
+
+userRoute.put(
+  '/progress',
+  verifyAuth,
+  async (req, res) => {
+    const { videoId, time, pausedTotal } = req.body;
+    const { id } = res.locals.user;
+    await users.updateProgress(id, videoId, time, pausedTotal);
+    return res.status(200).json({ message: 'OK' });
   },
 );
 

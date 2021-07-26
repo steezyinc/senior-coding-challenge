@@ -4,7 +4,7 @@ const { query, validationResult } = require('express-validator');
 
 const { verifyAuth } = require('../middlewares/verifyAuth');
 
-const { getClasses, getTotalClassCount } = require('../services/classes');
+const { getClasses, getTotalClassCount, getClassVideoUrlById } = require('../services/classes');
 
 userRoute.get(
   '/',
@@ -36,6 +36,17 @@ userRoute.get(
     }
 
     return res.status(200).json(responseObject);
+  },
+);
+
+userRoute.get(
+  '/:id/video-url',
+  verifyAuth,
+  async (req, res) => {
+    const videoId = req.params.id;
+
+    const requestedVideoUrl = await getClassVideoUrlById(videoId);
+    return res.status(200).json({ videoUrl: requestedVideoUrl });
   },
 );
 

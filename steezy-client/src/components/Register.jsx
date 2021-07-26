@@ -12,7 +12,7 @@ function Register() {
 
   async function register() {
     try {
-      const res = await axios({
+      await axios({
         method: 'post',
         url: '/users/register',
         data: {
