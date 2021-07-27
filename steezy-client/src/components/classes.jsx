@@ -24,11 +24,9 @@ function Classes() {
     getClasses(true);
   }, [])
 
-  async function getClassProgress(jwt, startId) {
-    const classIdArray = [];
-    for (let i = 0; i < 9; i++) {
-      classIdArray.push(startId + i);
-    }
+  async function getClassProgress(jwt, classes) {
+    const classIdArray = classes.map(classItem => classItem.id)
+
     const response = await axios({
       method: 'get',
       url: `/users/progress?classIds=${classIdArray}`,
@@ -71,7 +69,7 @@ function Classes() {
       const jwt = localStorage.getItem('jwt');
       if (jwt) {
         setAuth(true);
-        getClassProgress(jwt, startAtKey);
+        getClassProgress(jwt, response.data.classList);
       }
     } catch (err) {
       // todo: show something helpful
@@ -82,7 +80,7 @@ function Classes() {
 
   }
 
-  function handleVideoClick(videoUrl, id) {
+  function handleVideoClick(id) {
     if (isAuthed) {
       window.location.href = `classes/${id}`;
     } else {
@@ -99,7 +97,7 @@ function Classes() {
 
   function renderClasses() {
     return state.classList.map((classItem, index) => {
-      const {title, instructor, level, song, thumbnailSlug, videoUrl} = classItem;
+      const {title, instructor, level, song, thumbnailSlug} = classItem;
       const id = state.activePageNumber * paginationLimit + index; // ask me about this... #firebaseThings
       let renderedThumbnail = '';
 
@@ -118,7 +116,7 @@ function Classes() {
 
       return(
         <Col key={classItem.title}>
-          <Card style={{width: '25rem'}} className="bg-dark text-white" onClick={() => handleVideoClick(videoUrl, id)}>
+          <Card style={{width: '25rem'}} className="bg-dark text-white" onClick={() => handleVideoClick(id)}>
             <Card.Img src={renderedThumbnail} alt="Card image" />
             <Card.ImgOverlay>
               <Col md={8}> 

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactPlayer from "react-player"
 
-let count = 0;
-
 function VideoPlayer() {
   const [state, setState] = useState({
     videoUrl: null,
