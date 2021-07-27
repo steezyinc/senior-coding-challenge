@@ -4,7 +4,9 @@
   "description": "poc steezy app",
   "main": "index.js",
   "scripts": {
-    "test": ""
+    "start-server": "node index.js",
+    "start-client": "cd ./steezy-client && npm start",
+    "start": "npm run start-server && npm run start-client"
   },
   "repository": {
     "type": "git",

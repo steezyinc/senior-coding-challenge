@@ -20,8 +20,8 @@ app.use((err, req, res, next) => { // generic app level err handling
   next();
 });
 
-app.get('/hello', (req, res) => {
-  res.json({ hello: 'world' });
+app.get('/', (req, res) => {
+  res.redirect('http://localhost:3000');
 });
 
 app.listen(port, () => {
