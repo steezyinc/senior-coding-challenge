@@ -113,7 +113,7 @@ Best of luck and happy coding!
 - if you have questions setting this up, please contact brianphanz0r@gmail.com or brianphan88@gmail.com
 
 - you can access the deployed app here: http://13.52.212.124:3000/ (excuse the non https and no domain name)
-- i have also included a demo video of the app https://www.loom.com/share/628282ecccb7457cbf56603fbdf2f75b
+- i have also included a demo video of the app https://www.loom.com/share/628282ecccb7457cbf56603fbdf2f75b (sorry for the choppiness - usually loom does a better job)
 - if youd like read access to my firebase db, let me know the email that needs it
 
 ## Assumptions
