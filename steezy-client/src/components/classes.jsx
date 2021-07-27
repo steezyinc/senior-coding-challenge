@@ -115,7 +115,7 @@ function Classes() {
 
       return(
         <Col key={classItem.title}>
-          <Card style={{ width: '25rem', 'border-radius': '5px 5px 0 0'  }} className="bg-dark text-white" onClick={() => handleVideoClick(id)}>
+          <Card style={{ width: '25rem', border: '0' }} className="bg-dark text-white" onClick={() => handleVideoClick(id)}>
             <Card.Img src={renderedThumbnail} alt="Card image" />
             <Card.ImgOverlay style={{ 'padding-left': '0','padding-top': '0' }}>
               <Col md={10}  style={{ height:'100%', background: 'linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1))' }}> 
@@ -134,7 +134,7 @@ function Classes() {
               </Col>
             </Card.ImgOverlay>
             {
-              isAuthed ? (<ProgressBar style={{ 'border-radius': '0 0 5px 5px' }} now={progress}/>) : null
+              isAuthed ? (<ProgressBar style={{ 'borderRadius': '0 0 5px 5px', background: 'rgb(56,56,56)' }} now={progress}/>) : null
             }
           </Card>
         </Col>
