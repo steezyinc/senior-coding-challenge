@@ -93,8 +93,43 @@ You can assume that you do not have to support legacy browsers. Feel free to use
 Best of luck and happy coding!
 
 ## How to Run  
-Please provide instructions on how to run your application here...
 
+### setting up and running firebase
+- create a firebase account and add a project (here)[https://firebase.google.com/]
+- create a realtime db following these directions found (here)[https://firebase.google.com/docs/database/web/start]
+- using `./env-example` as a template, create an `.env` file
+- update the values in the file with your firebase configs following this (doc)[https://support.google.com/firebase/answer/7015592?hl=en#zippy=%2Cin-this-article], under "Get config object for your web app"
+- make sure to match the keys correctly. the config object's keys are camel case, while the `.env` is title case
+### setting up and running the server
+- install dependencies for the server by running `npm i` in the project/server directory `/`
+- start the server by running `npm start` in the project/server directory `/`
+
+### setting up and running the client
+- install dependencies for the client by running `npm i` in the client directoy `/steezy-client`
+- start the client by running `npm start` in the client directoy `/steezy-client`
+- if ran locally, your default broswer should automatically launch the app client on http://localhost:3000
+- if not, you can access it [here](http://localhost:3000)
+
+- if you have questions setting this up, please contact brianphanz0r@gmail.com or brianphan88@gmail.com
+
+- you can access the deployed app here: http://13.52.212.124:3000/ (excuse the non https and no domain name)
+- i have also included a demo video of the app https://www.loom.com/share/628282ecccb7457cbf56603fbdf2f75b
+- if youd like read access to my firebase db, let me know the email that needs it
 
 ## Assumptions
 Please list any assumptions or extra requirements you added to the application while developing below.
+- not too many assumptions were made in terms of the application behavior. i treid to follow it as closely as possible
+- assumptions were made on the execution of the application itself. i treated this like a proof of concept and did take shortcuts and trade-offs
+- the biggest trade-off was the implementation of `react-routing`. i was too far into the project when i had realized i did not correctly wrap my application, leaving me unable to use methods like `useHistory` and `useLocation` to properly route in a single page app. my work around was manually setting the location.href. given more time, i would go back and change that
+- another assumption - given the nature of this POC, i did not create the components to be reusable. i did seperate them by page, but ideally, in a scalable app, it would be more modular
+- while implementing, i did stray slightly off of what my email outlined. notably, it is NOT hosted on firebase, but i DO use the realtime db though (have not implemented read/write rules yet). i am actually hosting the application on an aws ec2 instance
+- also, i did not implement any strategies listed on passportJS. i found most their documentation to be lacking. so i implemented a simple version (no refresh logic included for this poc)
+- for the tracking of the video progress, pause and timestamp, i found this challenge to be very interesting. the 2 options i weighed for tracking progress were:
+  - (1) tracking timestamps as a 2d array `[[ 0, 30 ], [ 50, 120 ]]` and implementeing overlap logic - trade offs being, overall logic complexity and time complexity
+  - (2) marking off individual timestamps as timestamp events triggered `[ true, true, true, true, false, false, true, true, ...n ]` trade offs being space complexity
+- in the end, i chose option 2 because space is cheap these days. maybe not in the case of firebase but another db would be cheap. also, the logic is straighforward and obvious. potential imporvements to cut space complexity of this approach would to observe only time stamps divisible by 2 or 5
+- i did not implement the searching acceptance criteria and sort of knew going in, as outlined in the intial email. if i had to do this project over again, i would likely implement a SQL db to store relational data and have better text querying
+- i was glad to find that firebase realtime db does have a very straight forward pagination query
+- towards the end of sunday, i did take short cuts. notably, the routes made on sunday dont have validation or more http statuses
+- hope you guys can give leniency on my frontend code as my official title is backend enginner, but feel free to tear up my backend code, lol
+- overall, thank you for the opportunity and this was fun

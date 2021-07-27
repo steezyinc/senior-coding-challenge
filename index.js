@@ -20,10 +20,7 @@ app.use((err, req, res, next) => { // generic app level err handling
   next();
 });
 
-app.get('/', (req, res) => {
-  res.redirect('http://localhost:3000');
-});
-
 app.listen(port, () => {
+  // eslint-disable-next-line no-console
   console.log(`app listening at http://localhost:${port}`);
 });
