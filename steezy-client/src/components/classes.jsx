@@ -134,7 +134,9 @@ function Classes() {
               </Col>
             </Card.ImgOverlay>
             {
-              isAuthed ? (<ProgressBar style={{ 'borderRadius': '0 0 5px 5px', background: 'rgb(56,56,56)' }} now={progress}/>) : null
+              isAuthed ? 
+              (<ProgressBar style={{ 'borderRadius': '0 0 5px 5px', background: 'rgb(56,56,56)' }} now={progress}/>) :
+              (<ProgressBar style={{ 'borderRadius': '0 0 5px 5px', background: 'rgb(56,56,56)' }} now={0}/>)
             }
           </Card>
         </Col>
