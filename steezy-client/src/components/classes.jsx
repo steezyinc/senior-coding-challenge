@@ -117,7 +117,7 @@ function Classes() {
       }
 
       return(
-        <Col>
+        <Col key={classItem.title}>
           <Card style={{width: '25rem'}} className="bg-dark text-white" onClick={() => handleVideoClick(videoUrl, id)}>
             <Card.Img src={renderedThumbnail} alt="Card image" />
             <Card.ImgOverlay>
@@ -135,7 +135,9 @@ function Classes() {
                 
               </Col>
             </Card.ImgOverlay>
-            <ProgressBar now={renderProgress(index)} />
+            {
+              isAuthed ? (<ProgressBar now={renderProgress(index)} />) : null
+            }
           </Card>
         </Col>
       )
@@ -184,7 +186,7 @@ function Classes() {
         <Pagination.Prev onClick={() => handlePagination(state.activePageNumber - 1)} />
         { 
           pageValues.map((pageNumber) => {
-            return (<Pagination.Item active={pageNumber === state.activePageNumber} onClick={() => handlePagination(pageNumber)} >{pageNumber}</Pagination.Item>)
+            return (<Pagination.Item key={pageNumber} active={pageNumber === state.activePageNumber} onClick={() => handlePagination(pageNumber)} >{pageNumber}</Pagination.Item>)
           })
         }
         <Pagination.Next onClick={() => handlePagination(state.activePageNumber + 1)} />
@@ -196,7 +198,7 @@ function Classes() {
     <div className="login min-vh-100 d-infline-flex flex-column justify-content-center align-items-center">
       <Container>
       <Row>
-        <Col classNames="title" md={2}>
+        <Col className="title" md={2}>
           <h2 className="text-white">
             Classes
           </h2>
@@ -214,7 +216,7 @@ function Classes() {
             <Row md={3} className="g-3">
               { renderClasses() }
             </Row>
-            <Row md={12}>
+            <Row md={12} className="mt-5">
               {renderPagination()}
             </Row>
           </>
