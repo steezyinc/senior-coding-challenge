@@ -111,7 +111,7 @@ function VideoPlayer() {
   }
 
   return (
-    <div className="login min-vh-100 d-infline-flex flex-column justify-content-center align-items-center">
+    <div className="login d-infline-flex flex-column justify-content-center align-items-center">
       <ReactPlayer
         url={state.videoUrl}
         width='100%'

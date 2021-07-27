@@ -49,7 +49,7 @@ function Register() {
   }
 
   return (
-    <div className="login min-vh-100 d-flex flex-column justify-content-center align-items-center">
+    <div className="login d-flex flex-column justify-content-center align-items-center">
       <Container>
         <Row>
           <Col md={{ span: 4, offset: 4 }}>

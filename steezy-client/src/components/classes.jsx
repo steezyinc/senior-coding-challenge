@@ -72,7 +72,6 @@ function Classes() {
         getClassProgress(jwt, response.data.classList);
       }
     } catch (err) {
-      // todo: show something helpful
       console.log('couldnt get classes');
     } finally {
       setLoadingState(false);
@@ -88,8 +87,7 @@ function Classes() {
     }
   }
 
-  function renderProgress(index) {
-
+  function mapProgress(index) {
     const videoId = index + state.activePageNumber * paginationLimit;
 
     return state.classProgressList[videoId]
@@ -100,6 +98,7 @@ function Classes() {
       const {title, instructor, level, song, thumbnailSlug} = classItem;
       const id = state.activePageNumber * paginationLimit + index; // ask me about this... #firebaseThings
       let renderedThumbnail = '';
+      const progress = mapProgress(index)
 
       switch(thumbnailSlug) {
         case 'class-thumbnail-1.jpg':
@@ -116,25 +115,26 @@ function Classes() {
 
       return(
         <Col key={classItem.title}>
-          <Card style={{width: '25rem'}} className="bg-dark text-white" onClick={() => handleVideoClick(id)}>
+          <Card style={{ width: '25rem', 'border-radius': '5px 5px 0 0'  }} className="bg-dark text-white" onClick={() => handleVideoClick(id)}>
             <Card.Img src={renderedThumbnail} alt="Card image" />
-            <Card.ImgOverlay>
-              <Col md={8}> 
-                <Card.Title className="text-info">{title}</Card.Title>
-                <Card.Text className="small text-info">
-                  Instructor: {instructor}
-                </Card.Text>
-                <Card.Text className="small text-info">
-                  Level: {level}
-                </Card.Text>
-                <Card.Text className="small text-info">
-                  Song: {song}
-                </Card.Text>
-                
+            <Card.ImgOverlay style={{ 'padding-left': '0','padding-top': '0' }}>
+              <Col md={10}  style={{ height:'100%', background: 'linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1))' }}> 
+                <div style={{'margin-left': '8px', 'text-transform': 'capitalize' }}>
+                    <Card.Title className="text-white" style={{ 'min-height': '130px', 'max-height': '', 'padding-top': '8px' }}>{title}</Card.Title>
+                    <Card.Text className="small text-white">
+                      Instructor: <b>{instructor}</b>
+                    </Card.Text>
+                    <Card.Text className="small text-white">
+                      Level: <b>{level}</b>
+                    </Card.Text>
+                    <Card.Text className="small text-white">
+                      Song: <b>{song}</b> 
+                    </Card.Text>
+                </div>
               </Col>
             </Card.ImgOverlay>
             {
-              isAuthed ? (<ProgressBar now={renderProgress(index)} />) : null
+              isAuthed ? (<ProgressBar style={{ 'border-radius': '0 0 5px 5px' }} now={progress}/>) : null
             }
           </Card>
         </Col>
@@ -193,7 +193,7 @@ function Classes() {
   }
 
   return (
-    <div className="login min-vh-100 d-infline-flex flex-column justify-content-center align-items-center">
+    <div className="login d-infline-flex flex-column justify-content-center align-items-center">
       <Container>
       <Row>
         <Col className="title" md={2}>
@@ -214,7 +214,7 @@ function Classes() {
             <Row md={3} className="g-3">
               { renderClasses() }
             </Row>
-            <Row md={12} className="mt-5">
+            <Row md={12} className="mt-4">
               {renderPagination()}
             </Row>
           </>

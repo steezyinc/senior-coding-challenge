@@ -24,7 +24,6 @@ function Login({ handleLogin }) {
       const { jwt } = res.data
       handleLogin(jwt)
     } catch (err) {
-      // todo: helpful error message in form
       setState({
         ...state,
         isInvalid: true
@@ -41,7 +40,7 @@ function Login({ handleLogin }) {
   }
 
   return (
-    <div className="login min-vh-100 d-flex flex-column justify-content-center align-items-center">
+    <div className="login d-flex flex-column justify-content-center align-items-center">
       <Container>
         <Row>
           <Col md={{ span: 4, offset: 4 }}>
