@@ -36,7 +36,7 @@ function Classes() {
         Authorization: `Bearer ${jwt}`
       }
     });
-    debugger
+
     setState((prevState) => ({
       ...prevState,
       ...response.data,
@@ -91,7 +91,7 @@ function Classes() {
   }
 
   function renderProgress(index) {
-    debugger
+
     const videoId = index + state.activePageNumber * paginationLimit;
 
     return state.classProgressList[videoId]
@@ -175,7 +175,7 @@ function Classes() {
         ...prevState,
         activePageNumber: pageNumber
       }));
-      debugger
+
       await getClasses(false, pageNumber * paginationLimit) 
     }
 

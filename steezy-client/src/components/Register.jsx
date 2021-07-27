@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Container, Row, Col, Form, Card } from 'react-bootstrap';
+import { Button, Container, Row, Col, Form, Card, InputGroup } from 'react-bootstrap';
 import axios from 'axios';
 
 function Register() {
   const [state, setState] = useState({
     email: '',
     password: '',
-    isInvalid: false
+    emailIsInvalid: false,
+    passwordIsInvalid: false
   })
 
 
@@ -23,18 +24,27 @@ function Register() {
       
       window.location.href = '/login'
     } catch (err) {
-      // todo: helpful error message in form
-      setState({
-        ...state,
-        isInvalid: true
-      })
+      if (err.response && err.response.status === 400) {
+        setState({
+          ...state,
+          passwordIsInvalid: true
+        })
+      } else if (err.response && err.response.status === 409) {
+        setState({
+          ...state,
+          emailIsInvalid: true
+        })
+
+      }
     }
   }
 
   function handleChange(e) {
     setState({
       ...state,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      emailIsInvalid: false,
+      passwordIsInvalid: false
     })
   }
 
@@ -48,24 +58,36 @@ function Register() {
                 <Card.Title>Steezy Studio</Card.Title>
                 <Form>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control
-                      type="email"
-                      placeholder="Email Address"
-                      name="email"
-                      value={state.email}
-                      onChange={handleChange}
-                      required
-                      isInvalid={state.isInvalid}/>
+                    <InputGroup hasValidation>
+                      <Form.Control
+                        type="email"
+                        placeholder="Email Address"
+                        name="email"
+                        value={state.email}
+                        onChange={handleChange}
+                        required
+                        isInvalid={state.emailIsInvalid} 
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Email is already registered.
+                      </Form.Control.Feedback>
+                    </InputGroup>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Control
-                      type="password"
-                      placeholder="Password"
-                      name="password"
-                      value={state.password}
-                      onChange={handleChange}
-                      required
-                      isInvalid={state.isInvalid}/>
+                    <InputGroup hasValidation>
+                      <Form.Control
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                        value={state.password}
+                        onChange={handleChange}
+                        required
+                        isInvalid={state.passwordIsInvalid}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Invalid password
+                      </Form.Control.Feedback>
+                    </InputGroup>
                   </Form.Group>
                   <div className="d-grid gap-2">
                     <Button variant="primary" size="md" onClick={register}>
