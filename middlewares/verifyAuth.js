@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const secret = process.env.SECRET;
 
+// eslint-disable-next-line consistent-return
 function verifyAuth(req, res, next) {
   const { authorization } = req.headers;
 
