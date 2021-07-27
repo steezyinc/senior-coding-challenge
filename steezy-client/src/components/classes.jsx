@@ -117,10 +117,10 @@ function Classes() {
         <Col key={classItem.title}>
           <Card style={{ width: '25rem', border: '0' }} className="bg-dark text-white" onClick={() => handleVideoClick(id)}>
             <Card.Img src={renderedThumbnail} alt="Card image" />
-            <Card.ImgOverlay style={{ 'padding-left': '0','padding-top': '0' }}>
+            <Card.ImgOverlay style={{ 'paddingLeft': '0','paddingTop': '0' }}>
               <Col md={10}  style={{ height:'100%', background: 'linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1))' }}> 
-                <div style={{'margin-left': '8px', 'text-transform': 'capitalize' }}>
-                    <Card.Title className="text-white" style={{ 'min-height': '130px', 'max-height': '', 'padding-top': '8px' }}>{title}</Card.Title>
+                <div style={{'marginLeft': '8px', 'textTransform': 'capitalize' }}>
+                    <Card.Title className="text-white" style={{ 'minHeight': '130px', 'paddingTop': '8px' }}>{title}</Card.Title>
                     <Card.Text className="small text-white">
                       Instructor: <b>{instructor}</b>
                     </Card.Text>
