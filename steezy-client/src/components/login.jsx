@@ -40,7 +40,7 @@ function Login({ handleLogin }) {
   }
 
   return (
-    <div className="login d-flex flex-column justify-content-center align-items-center">
+    <div className="login d-flex flex-column justify-content-center align-items-center" style={{ marginTop: '34vh' }}>
       <Container>
         <Row>
           <Col md={{ span: 4, offset: 4 }}>
