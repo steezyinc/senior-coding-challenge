@@ -34,7 +34,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App min-vh-100">
       <Router>
         <div>
         <Navbar bg="dark" variant="dark">
